@@ -1,4 +1,4 @@
-from pre_sliced.matrix_entities.vectors import ForwardVector, PartitionedForwardVector, ExposedForwardVector
+from pre_sliced.matrix_entities.vectors.forward_vector import ForwardVector, PartitionedForwardVector, ExposedForwardVector
 
 
 def test_empty_vector_creation():

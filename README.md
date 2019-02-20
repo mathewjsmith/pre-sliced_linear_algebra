@@ -2,6 +2,7 @@
 This project is inspired by the FLAME notation (also referred to as "Slicing and Dicing") of linear algebra algorithms as presented in the ![Linear Algebra: Foundations to Frontiers](http://ulaff.net/index.html) series of MOOC's from the University of Texas. The goal is to implement the slicing and dicing method in a library which can be used to experiment with and implement linear algebra algorithms in a way which is boilerplate free and highly expressive.
 
 - [FLAME Notation](#flame-notation)
+- [Motivation](#flame-notation)
 - [Implementation](#implementation)
 - [Usage](#usage)
 - [TODO](#todo)
@@ -52,8 +53,48 @@ Blocked algorithms expose sub-matrices instead of scalars:
 
 ![](https://latex.codecogs.com/svg.latex?A%20%5Crightarrow%20%5Cleft%28%5Cbegin%7Barray%7D%7Bc%7Cc%7D%20A_%7BTL%7D%20%26%20A_%7BTR%7D%20%5C%5C%20%5Chline%20A_%7BBL%7D%20%26%20A_%7BBR%7D%20%5Cend%7Barray%7D%5Cright%29%20%5Crightarrow%20%5Cleft%28%5Cbegin%7Barray%7D%7Bc%7Ccc%7D%20A_%7BTL%7D%20%26%20A_%7B01%7D%20%26%20A_%7B02%7D%20%5C%5C%20%5Chline%20A_%7B10%7D%20%26%20A_%7B11%7D%20%26%20A_%7B12%7D%20%5C%5C%20A_%7B20%7D%20%26%20A_%7B21%7D%20%26%20A_%7B22%7D%20%5Cend%7Barray%7D%5Cright%29)
 
+## Motivation
+FLAME notation is a wonderful tool for learning about, exploring, and deriving linear algebra algorithms. However things start to break down once we go to apply our findings in code. There exists from the Flame team the ![Spark webpage](http://www.cs.utexas.edu/users/flame/Spark/) where one can generate boilerplate code in a number of languages based on the specified input/output operands and the directions in which they should be traversed. There are a few problems here:
+- The need for such a webpage in the first place. It's a bit tedious and a step which can be eliminated.
+- The code that is generated is not particularly pretty. It would be very difficult for anyone besides the person who generated the code to figure out what's going on; what operands are there and in what direction are they being traversed.
+
+The goal of this project is to alleviate these pain points by creating an API with which one can immediately jump into experimenting with linear algebra algorithms with next to no boilerplate while being very expressive about the operands involved in an algorithm and the direction in which they are traversed.
+
 ## Implementation
+Looking at the previous example of FLAME notation, there is a clear set of steps which will be consistent accross all algorithms:
+- **Partition** the operands.
+- **Expose** values.
+- Use the exposed values to **calculate** the desired value.
+- **Update** the output operand with the calculation.
+- **Repartition** the operands and repeat until all values are in one side of the operand, then output the result.
+
+With this specification in mind the following abstract classes have been created which all operands are based on:
+
+// TODO: Add code snippet.
+
+Concrete types for the three types of operands; scalars, vectors, and matrices, have been/will be implemented based on the above abstract classes, with a different implementation for each direction in which the operands can be traversed:
+
+- Scalar (Most methods for scalar are simply identity)
+- TBVector/Matrix (Top-to-bottom)
+- BTVector/Matrix (Bottom-to-top)
+- LRVector/Matrix (Left-to-right)
+- RLVector/Matrix (right-to-left)
+- TLBRMatrix (Top-left to bottom-right)
+- BRTLMatrix (Bottom-right to top-left)
+- TRBLMatrix (Top-right to bottom-left)
+- BLTRMatrix (Bottom-left to top-right)
+
+Blocked versions of the diagonally-traversing matrices may also be implemented in the future.
+
+It might seem unneccessary to create distinct types for all of these different directions, however the direction in which a matrix is traversed can have implications for performance and how an algorithm is defined, so it is important that this is expressed. (//TODO: Add link to relevant LAFF lesson).
+
+With the above in place, the **apply** function is implemented. This is where the magic happens and the value of this project comes to fruition. The apply function takes an arbitary function and an arbitary number of any sub-types of the Operand class as parameters. It goes through the **partition** -> **expose** -> **calculate** -> **update** -> **repartition** -> **repeat** process for each of the operands, where the **calculate** step is defined by the function that is passed in.
+
+// TODO: Add code snippet.
 
 ## Usage
+Using the apply method with our operand types, we can implement any linear algebra algorithm with a single function where the operands and the direction in which they are traversed are clearly expressed in the type signature, and only the **calculate** step need be defined. Pass all of this into the **apply** function, and you're done.
+
+// TODO: Add code snippets with examples.
 
 ## TODO

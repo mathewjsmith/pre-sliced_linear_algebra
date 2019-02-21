@@ -52,7 +52,7 @@ And matrices diagonally:
 
 ![](https://latex.codecogs.com/svg.latex?A%20%5Crightarrow%20%5Cleft%28%5Cbegin%7Barray%7D%7Bc%7Cc%7D%20A_%7BTL%7D%20%26%20A_%7BTR%7D%20%5C%5C%20%5Chline%20A_%7BBL%7D%20%26%20A_%7BBR%7D%20%5Cend%7Barray%7D%5Cright%29%20%5Crightarrow%20%5Cleft%28%5Cbegin%7Barray%7D%7Bc%7Ccc%7D%20A_%7BTL%7D%20%26%20a_%7B01%7D%20%26%20A_%7B02%7D%20%5C%5C%20%5Chline%20a%5ET_%7B10%7D%20%26%20%5Calpha_%7B11%7D%20%26%20a%5ET_%7B12%7D%20%5C%5C%20A_%7B20%7D%20%26%20a_%7B21%7D%20%26%20A_%7B22%7D%20%5Cend%7Barray%7D%5Cright%29)
 
-Blocked algorithms expose sub-matrices instead of scalars:
+Blocked algorithms expose sub-matrices instead of vectors and scalars:
 
 ![](https://latex.codecogs.com/svg.latex?A%20%5Crightarrow%20%5Cleft%28%5Cbegin%7Barray%7D%7Bc%7Cc%7D%20A_%7BTL%7D%20%26%20A_%7BTR%7D%20%5C%5C%20%5Chline%20A_%7BBL%7D%20%26%20A_%7BBR%7D%20%5Cend%7Barray%7D%5Cright%29%20%5Crightarrow%20%5Cleft%28%5Cbegin%7Barray%7D%7Bc%7Ccc%7D%20A_%7BTL%7D%20%26%20A_%7B01%7D%20%26%20A_%7B02%7D%20%5C%5C%20%5Chline%20A_%7B10%7D%20%26%20A_%7B11%7D%20%26%20A_%7B12%7D%20%5C%5C%20A_%7B20%7D%20%26%20A_%7B21%7D%20%26%20A_%7B22%7D%20%5Cend%7Barray%7D%5Cright%29)
 

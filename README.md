@@ -59,7 +59,8 @@ Blocked algorithms expose sub-matrices instead of vectors and scalars:
 ## Motivation
 FLAME notation is a wonderful tool for reasoning about linear algebra algorithms. However things start to break down once we go to apply it in code. There exists from the Flame team the ![Spark webpage](http://www.cs.utexas.edu/users/flame/Spark/) where one can generate boilerplate code in a number of languages based on the specified input/output operands and the directions in which they should be traversed. There are a few problems here:
 - The need for such a webpage in the first place. It's a bit tedious and a step which can be eliminated.
-- The code that is generated is verbose and unclear. It would be very difficult for anyone besides the person who generated the code to figure out what's going on; what operands are there and in what direction are they being traversed. The only part of the code that we really care about is the update section, can we eliminate the clutter?
+- The code that is generated is verbose and unclear. It would be very difficult for anyone besides the person who generated the code to figure out what's going on; what operands are there and in what direction are they being traversed. 
+- The only part of the code that we really care about is the update section, can we eliminate the clutter?
 
 The goal of this project is to alleviate these pain points by creating an API with which one can immediately jump into experimenting with linear algebra algorithms with next to no boilerplate while being very expressive about the operands involved in an algorithm and the direction in which they are traversed.
 
@@ -152,11 +153,11 @@ Using the apply method with our operand types, we can implement any linear algeb
 
 ```python
 def axpy(alpha: Scalar, x: TBVector, y: TBVector):
-    return apply(axpy_kernel, alpha, x, y)
 
+    def kernel(alpha: float, chi: float, psi: float):
+        return alpha * chi + psi
 
-def axpy_kernel(alpha: float, chi: float, psi: float):
-    return alpha * chi + psi
+    return apply(kernel, alpha, x, y)
 
 
 def scal(alpha: Scalar, x: TBVector):
@@ -164,16 +165,22 @@ def scal(alpha: Scalar, x: TBVector):
 
 
 def dot_product(x: LRVector, y: TBVector):
+
     alpha = Scalar(0)
-    return apply(lambda chi, psi, alpha: chi * psi + alpha, x, y, alpha)
+
+    def kernel(chi: float, psi: float, alpha: float):
+        return chi * psi + alpha
+
+    return apply(kernel, x, y, alpha)
 
 
 def euclidean_length(x: TBVector):
     sum_of_squares = dot_product(x, x)
     return sqrt(sum_of_squares)
+
 ```
 
-For very simple operations like the above, a lambda expression is appropriate. For more complicated operations it might be more appropriate to create a seperate "kernel function" to ensure that the core logic is clearly expressed.
+For very simple operations like the above, a lambda expression might be appropriate as has been done for scal, however I believe it is preferrable to explicitly define a kernel function for readability/expressiveness.
 
 A few notes on usage:
 - The output operand should always be the last one passed in to the apply function, as this is the operand that the update step is applied to.

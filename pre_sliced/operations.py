@@ -1,6 +1,6 @@
 from pre_sliced.apply import apply
-from pre_sliced.matrix_entities.vectors import TBVector, LRVector
-from pre_sliced.matrix_entities.scalar import Scalar
+from pre_sliced.operands.vectors import TBVector, LRVector
+from pre_sliced.operands.scalar import Scalar
 from math import sqrt
 
 

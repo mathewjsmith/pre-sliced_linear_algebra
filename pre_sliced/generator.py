@@ -1,6 +1,6 @@
 import random
-from pre_sliced.matrix_entities.scalar import Scalar
-from pre_sliced.matrix_entities.vectors import TBVector, LRVector
+from pre_sliced.operands.scalar import Scalar
+from pre_sliced.operands.vectors import TBVector, LRVector
 
 
 def generate_scalar(minimum=0, maximum=10, allow_decimals=False):

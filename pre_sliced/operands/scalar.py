@@ -1,7 +1,7 @@
-from pre_sliced.matrix_entities import MatrixEntity, PartitionedMatrixEntity, ExposedMatrixEntity
+from pre_sliced.operands import Operand, PartitionedOperand, ExposedOperand
 
 
-class Scalar(MatrixEntity, PartitionedMatrixEntity, ExposedMatrixEntity):
+class Scalar(Operand, PartitionedOperand, ExposedOperand):
     def __init__(self, value: float):
         self.value = value
 

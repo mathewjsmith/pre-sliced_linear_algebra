@@ -1,14 +1,14 @@
-from pre_sliced.matrix_entities import MatrixEntity, PartitionedMatrixEntity
+from pre_sliced.operands import Operand, PartitionedOperand
 import inspect
 
 
-def apply(f, *expression: MatrixEntity):
+def apply(f, *expression: Operand):
     arity = len(inspect.signature(f).parameters)
     assert arity == len(expression), "The size of the expression did not match the arity of the function."
 
     partitionings = [x.partition() for x in expression]
 
-    def _apply(f, *expression: PartitionedMatrixEntity):
+    def _apply(f, *expression: PartitionedOperand):
         if all(x.is_complete() for x in expression):
             return expression[-1].combine().value
         else:

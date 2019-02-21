@@ -1,8 +1,8 @@
-from pre_sliced.matrix_entities import MatrixEntity, PartitionedMatrixEntity, ExposedMatrixEntity
+from pre_sliced.operands import Operand, PartitionedOperand, ExposedOperand
 from typing import List
 
 
-class ForwardVector(MatrixEntity):
+class ForwardVector(Operand):
     def __init__(self, value: List[float]):
         self.value = value
 
@@ -10,7 +10,7 @@ class ForwardVector(MatrixEntity):
         return PartitionedForwardVector([], self.value)
 
 
-class PartitionedForwardVector(PartitionedMatrixEntity):
+class PartitionedForwardVector(PartitionedOperand):
     def __init__(self, top: List[float], bottom: List[float]):
         self.top = top
         self.bottom = bottom
@@ -29,7 +29,7 @@ class PartitionedForwardVector(PartitionedMatrixEntity):
         return self.top, self.bottom
 
 
-class ExposedForwardVector(ExposedMatrixEntity):
+class ExposedForwardVector(ExposedOperand):
     def __init__(self, x: List[float], chi: float, xs: List[float]):
         self.x = x
         self.chi = chi

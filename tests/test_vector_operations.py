@@ -1,6 +1,6 @@
 from pre_sliced.operations import axpy, scal, dot_product, euclidean_length
-from pre_sliced.matrix_entities.scalar import Scalar
-from pre_sliced.matrix_entities.vectors import TBVector
+from pre_sliced.operands.scalar import Scalar
+from pre_sliced.operands.vectors import TBVector
 
 
 def test_axpy():

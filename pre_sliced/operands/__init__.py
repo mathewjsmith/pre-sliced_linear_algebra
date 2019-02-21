@@ -1,14 +1,14 @@
 from abc import ABC, abstractmethod
 
 
-class MatrixEntity(ABC):
+class Operand(ABC):
 
     @abstractmethod
     def partition(self):
         pass
 
 
-class PartitionedMatrixEntity(ABC):
+class PartitionedOperand(ABC):
 
     @abstractmethod
     def expose(self):
@@ -23,7 +23,7 @@ class PartitionedMatrixEntity(ABC):
         pass
 
 
-class ExposedMatrixEntity(ABC):
+class ExposedOperand(ABC):
 
     @abstractmethod
     def repartition(self):

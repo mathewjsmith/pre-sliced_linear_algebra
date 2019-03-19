@@ -8,6 +8,9 @@ class Scalar(Operand, PartitionedOperand, ExposedOperand):
     def partition(self):
         return self
 
+    def get_value(self):
+        return self.value
+
     def expose(self):
         return self
 

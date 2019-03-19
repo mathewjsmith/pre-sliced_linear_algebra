@@ -1,4 +1,5 @@
 from pre_sliced.operands import Operand, PartitionedOperand, ExposedOperand
+from pre_sliced.operands.scalar import Scalar
 from typing import List
 
 
@@ -8,6 +9,9 @@ class ForwardVector(Operand):
 
     def partition(self):
         return PartitionedForwardVector([], self.value)
+
+    def get_value(self):
+        return self.value
 
 
 class PartitionedForwardVector(PartitionedOperand):

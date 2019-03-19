@@ -7,6 +7,10 @@ class Operand(ABC):
     def partition(self):
         pass
 
+    @abstractmethod
+    def get_value(self):
+        pass
+
 
 class PartitionedOperand(ABC):
 

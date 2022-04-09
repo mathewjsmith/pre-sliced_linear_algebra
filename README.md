@@ -14,7 +14,7 @@ FLAME notation has a number of advantages over typical representations of linear
 - Indicies are abstracted away - algorithms are defined recursively.
 - It lends itself to clean and expressive derivations and proofs.
 
-I will present a simple example below. For more on FLAME notation, see this ![introduction by the wonderful Rob van de Geijn](https://www.youtube.com/watch?v=QCg0VQOUB8E), ![section 4.2 "A Farewell to Indicies" from LAFF: On Programming for Correctness](http://www.cs.utexas.edu/users/rvdg/pubs/LAFFPfC.pdf), and if you want to go further, ![the entire series of LAFF MOOC's.](http://ulaff.net/index.html)
+I will present a simple example below. For more on FLAME notation, see this ![introduction by Rob van de Geijn](https://www.youtube.com/watch?v=QCg0VQOUB8E), ![section 4.2 "A Farewell to Indicies" from LAFF: On Programming for Correctness](http://www.cs.utexas.edu/users/rvdg/pubs/LAFFPfC.pdf), and if you want to go further, ![the entire series of LAFF MOOC's.](http://ulaff.net/index.html)
 
 Consider the typical summation notation for the dot-product:
 
@@ -76,14 +76,12 @@ With this specification in mind the following abstract classes have been created
 
 ```python
 class Operand(ABC):
-
     @abstractmethod
     def partition(self):
         pass
 
 
 class PartitionedOperand(ABC):
-
     @abstractmethod
     def expose(self):
         pass
@@ -98,7 +96,6 @@ class PartitionedOperand(ABC):
 
 
 class ExposedOperand(ABC):
-
     @abstractmethod
     def repartition(self):
         pass
@@ -153,7 +150,6 @@ Using the apply method with our operand types, we can implement any linear algeb
 
 ```python
 def axpy(alpha: Scalar, x: TBVector, y: TBVector):
-
     def kernel(alpha: float, chi: float, psi: float):
         return alpha * chi + psi
 
@@ -165,7 +161,6 @@ def scal(alpha: Scalar, x: TBVector):
 
 
 def dot_product(x: LRVector, y: TBVector):
-
     alpha = Scalar(0)
 
     def kernel(chi: float, psi: float, alpha: float):
@@ -177,10 +172,9 @@ def dot_product(x: LRVector, y: TBVector):
 def euclidean_length(x: TBVector):
     sum_of_squares = dot_product(x, x)
     return sqrt(sum_of_squares)
-
 ```
 
-For very simple operations like the above, a lambda expression might be appropriate as has been done for scal, however I believe it is preferrable to explicitly define a kernel function for readability/expressiveness.
+For very simple operations like the above, a lambda expression might be appropriate as has been done for `scal`, however I believe it is preferrable to explicitly define a kernel function for readability/expressiveness.
 
 A few notes on usage:
 - The output operand should always be the last one passed in to the apply function, as this is the operand that the update step is applied to.

@@ -123,7 +123,7 @@ Concrete types for the three types of operands; scalars, vectors, and matrices, 
 
 Blocked versions of the diagonally-traversing matrices may also be implemented in the future.
 
-With the above in place, the **apply** function is implemented. This is where the magic happens and the value of this project comes to fruition. The apply function takes an arbitary function and an arbitary number of any sub-types of the Operand class as parameters. It goes through the **partition** -> **expose** -> **calculate** -> **update** -> **repartition** -> **repeat** process for each of the operands, where the **calculate** step is defined by the function that is passed in.
+With the above in place, the `apply` function is implemented. This is where the magic happens and the value of this project comes to fruition. The apply function takes an arbitary function and an arbitary number of any sub-types of the Operand class as parameters. It goes through the `partition -> expose -> calculate -> update -> repartition -> repeat` process for each of the operands, where the **calculate** step is defined by the function that is passed in.
 
 ```python
 def apply(f, *expression: Operand):
